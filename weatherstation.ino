@@ -14,8 +14,8 @@
 #define OLED_CS    6  // Connect to the CS (Chip Select) pin of the OLED display
 #define OLED_RESET 7   // Connect to the RST (Reset) pin of the OLED display
 const int chipSelect = 4;
-const char* ssid     = "Hubbard Express 5G";
-const char* password = "3300719731973";
+const char* ssid     = "your_ssid";
+const char* password = "your_password";
 const int uvSensorPin = A0;
 int anemometerPin = A2;
 
@@ -49,7 +49,7 @@ void setup() {
   // Begin WiFi connection
   Serial.print("Connecting to ");
   Serial.println(ssid);
-  WiFi.begin("Hubbard Express", "3300719731973");
+  WiFi.begin(ssid, password);
 
   // Wait for connection and print the status every second
   while (WiFi.status() != WL_CONNECTED) {

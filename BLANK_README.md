@@ -27,10 +27,12 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">Arduino Based Weather Station</h3>
 
   <p align="center">
-    project_description
+    Hi! This is a project that I made for high school applications and also just for fun! It is a weather station that uses an Arduino R4 Wifi and some sensors.
+    It uses I2C communication for the sensors and OLED screen, and SPI for the data logger. It is fully written in Arduino C++, and the code can be found at     weatherstation.ino
+    This is the second version of the weather station, with additional features. 
     <br />
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />

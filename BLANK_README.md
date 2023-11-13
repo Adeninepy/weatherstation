@@ -81,7 +81,7 @@ Required Materials/Sensors:
 
 Optional:
 1 x Anemometer Wind Speed Sensor w/Analog Voltage Output = $14.95
-1 x Monochrome 0.96" 128x64 OLED Graphic Display = $17.50
+1 x Monochrome 0.96 128x64 OLED Graphic Display = $14.50
 
 
 Requried Libraries:

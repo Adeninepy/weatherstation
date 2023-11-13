@@ -24,7 +24,7 @@
 <h3 align="center">Arduino Based Weather Station</h3>
 
   <p align="center">
-    Hi! This is a project that I made for high school applications and also just for fun! It is a weather station that uses an Arduino R4 Wifi and some sensors.
+    Hi, this is a project that was inspired from my school buying a weather station, and me thinking of ways that I could improve it. It is a weather station that uses an Arduino R4 Wifi and some sensors.
     It uses I2C communication for the sensors and OLED screen, and SPI for the data logger. It is fully written in Arduino C++, and the code can be found at     weatherstation.ino
     This is the second version of the weather station, with additional features. 
     <br />

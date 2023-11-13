@@ -141,7 +141,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Email Me - harry.oltmans@adeninelabs.com
+Email Me - adenine@adeninelabs.com
 
 Project Link: [https://github.com/github_username/repo_name](https://github.com/muffnpy/weatherstation)
 

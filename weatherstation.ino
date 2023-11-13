@@ -1,5 +1,4 @@
 #include <Wire.h>
-#include <Adafruit_Sensor.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_BMP3XX.h>
 #include <Adafruit_AHTX0.h>

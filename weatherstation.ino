@@ -12,9 +12,12 @@
 
 
 
-#define OLED_DC    5  // Connect to the DC (Data/Command) pin of the OLED display
-#define OLED_CS    6  // Connect to the CS (Chip Select) pin of the OLED display
-#define OLED_RESET 7   // Connect to the RST (Reset) pin of the OLED display
+#define OLED_ADDR   0x3D
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+#define OLED_RESET 7 
+
+
 const int chipSelect = 4;
 const int cardDetectPin = 10;
 
@@ -26,14 +29,19 @@ const char* ntpServer = "pool.ntp.org";
 WiFiUDP udp;
 unsigned int localPort = 2390; // Local port for UDP
 
-const char* ssid     = "your_ssid"; 
-const char* password = "your_password";
+//school mode: 
+//const char* ssid     = "LiveOakStudentNet";
+//const char* password = "Love2Learn!";
+
+const char* ssid     = "Hubbard Express";
+const char* password = "3300719731973";
+
 
 const int uvSensorPin = A0;
 int anemometerPin = A2;
 
 WiFiServer server(80);
-Adafruit_SSD1306 display(128, 64, &Wire);
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 File dataFile;
 
 Adafruit_BMP3XX bmp;
@@ -60,7 +68,21 @@ void setup() {
   // Start the serial communication
   Serial.begin(115200);
   while (!Serial); // for boards that support it, wait for serial port to connect.
-  
+  // Start OLED display
+  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3D)) {
+    Serial.println(F("SSD1306 allocation failed"));
+  }
+
+
+  // Set text size
+  display.setTextSize(1);
+  // Set text color
+  display.setTextColor(SSD1306_WHITE);
+  // Set cursor position
+  display.setCursor(0,0);
+
+
+
   // Begin WiFi connection
   Serial.print("Connecting to ");
   Serial.println(ssid);
@@ -83,17 +105,10 @@ void setup() {
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
   server.begin();
-    // Start OLED display
-    if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3D)) {
-      Serial.println(F("SSD1306 allocation failed"));
-    for(;;);
-  }
 
-  display.clearDisplay();
   // Start sensors on I2C communication
   if (!SD.begin(4)) {
     Serial.println("SD card connection failed!");
-    while (1);
   }
   if (!bmp.begin_I2C()) {
     Serial.println("BMP connection failed!");
@@ -111,9 +126,13 @@ void setup() {
   RTC.begin();
   udp.begin(localPort);
   setRTCTime();
+  display.clearDisplay();
+
 }
 
 void loop() {
+  Serial.print("code stupid");
+  /*
   //check for client connection, if client is connected, then print to website.
   static unsigned long lastUpdateTime = millis();
   if (millis() - lastUpdateTime > updateInterval) {
@@ -145,19 +164,15 @@ void loop() {
     }
     client.stop();
   }
-  if (digitalRead(cardDetectPin) == LOW) { // Assuming the CD pin is active low
-    Serial.println("SD Card is inserted.");
-  }
-  else {
-    Serial.println("SD Card is not inserted.");
-  }
+*/
+
   // convert raw voltage to voltage used and wind speed
   int rawReading = analogRead(anemometerPin);
   float voltage = (rawReading / 1023.0) * 5.0;
   float windSpeed = (voltage - 0.4) * (32.4 / (2.0 - 0.4));
 
   // get current time, day, month, hour, and year
-RTCTime currenttime;
+  RTCTime currenttime;
   RTC.getTime(currenttime);
   String currentDate = String(currenttime.getDayOfMonth()) + "/" + String(Month2int(currenttime.getMonth())) + "/" + String(currenttime.getYear());
   String currentTime = String(currenttime.getHour()) + ":" + String(currenttime.getMinutes());
@@ -216,16 +231,18 @@ RTCTime currenttime;
   display.print(F("Heat Index: ")); display.print(heatIndex); display.println(F(" F"));
 
 
-/*
+
   display.print(F("Temp: ")); display.print(temperature); display.println(F(" C"));
   display.print(F("Curr: ")); display.print(current); display.println(F(" mA"));
   display.print(F("Pow: ")); display.print(power); display.println(F(" mW"));
   display.print(F("Date: ")); display.println(currentDate);
   display.print(F("Time: ")); display.println(currentTime);
   display.print(F("Wind Speed: ")); display.print(windSpeed); display.println(F(" m/s"));
-  */
+  
 
   display.display();
+
+
   //log all info to sd card, if it is detected
   dataFile = SD.open("datalog.txt", FILE_WRITE);
   if (dataFile) {

@@ -29,12 +29,9 @@ const char* ntpServer = "pool.ntp.org";
 WiFiUDP udp;
 unsigned int localPort = 2390; // Local port for UDP
 
-//school mode: 
-//const char* ssid     = "LiveOakStudentNet";
-//const char* password = "Love2Learn!";
 
-const char* ssid     = "Hubbard Express";
-const char* password = "3300719731973";
+const char* ssid     = your_ssid;
+const char* password = your_password;
 
 
 const int uvSensorPin = A0;

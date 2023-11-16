@@ -21,7 +21,7 @@
 const int chipSelect = 4;
 const int cardDetectPin = 10;
 
-const int timeZoneOffsetSec = 18000; // Adjust according to your timezone, in seconds
+const int timeZoneOffsetSec = 14400; // Adjust according to your timezone, in seconds
 const unsigned long updateInterval = 900000; // Update interval for NTP (1 hour)
 const char* ntpServer = "pool.ntp.org";
 
